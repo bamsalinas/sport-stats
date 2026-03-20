@@ -10,101 +10,117 @@ export function Header({ currentView, onViewChange, onImportClick, user }) {
   ]
 
   return (
-    <div style={{
-      background: 'var(--bg-secondary)',
-      borderBottom: '1px solid var(--border)',
+    <div className="app-header" style={{
       position: 'sticky',
       top: 0,
-      zIndex: 100
+      zIndex: 100,
+      width: '100%'
     }}>
       <div style={{
-        maxWidth: '1200px',
+        maxWidth: '1400px',
         margin: '0 auto',
         padding: '0 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '60px'
+        height: '56px'
       }}>
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '24px' }}>🥋</span>
           <span style={{ 
-            fontFamily: 'Barlow Condensed, sans-serif', 
-            fontSize: '20px', 
-            fontWeight: 800,
-            color: 'var(--accent-tkd)'
+            fontWeight: 700, 
+            fontSize: '18px',
+            color: '#ffffff'
           }}>
             SPORT STATS
           </span>
-          <Badge color="var(--accent-tkd)" style={{ marginLeft: '8px' }}>Taekwondo</Badge>
+          <Badge color="var(--league)" style={{ marginLeft: '4px' }}>TKD</Badge>
         </div>
 
-        {/* Menú de navegación */}
-        <div style={{ display: 'flex', gap: '4px' }}>
+        {/* Menú de navegación - íconos con colores originales */}
+        <div style={{ display: 'flex', gap: '8px' }}>
           {menuItems.map(item => (
             <button
               key={item.id}
               onClick={() => onViewChange(item.id)}
               style={{
-                background: currentView === item.id ? 'var(--accent-tkd)' : 'transparent',
+                background: 'transparent',
                 border: 'none',
                 borderRadius: '6px',
-                padding: '8px 12px',
-                color: currentView === item.id ? '#fff' : 'var(--text-secondary)',
+                padding: '6px 12px',
+                color: currentView === item.id ? 'var(--primary)' : 'rgba(255, 255, 255, 0.7)',
                 cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
+                fontSize: 13,
+                fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                transition: 'all 0.2s'
+                transition: 'color 0.15s'
+              }}
+              onMouseEnter={e => {
+                if (currentView !== item.id) {
+                  e.currentTarget.style.color = '#ffffff'
+                }
+              }}
+              onMouseLeave={e => {
+                if (currentView !== item.id) {
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'
+                }
               }}
             >
-              <span>{item.icon}</span>
+              <span style={{ display: 'inline-block' }}>{item.icon}</span>
               <span>{item.label}</span>
             </button>
           ))}
           
-          {/* Botón Importar destacado */}
+          {/* Botón Importar */}
           <button
             onClick={onImportClick}
             style={{
-              background: 'var(--accent-blue)',
-              border: 'none',
+              background: 'transparent',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
               borderRadius: '6px',
-              padding: '8px 16px',
-              color: '#fff',
+              padding: '6px 12px',
+              color: 'rgba(255, 255, 255, 0.8)',
               cursor: 'pointer',
-              fontSize: '14px',
+              fontSize: 13,
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
               marginLeft: '8px',
-              transition: 'all 0.2s'
+              transition: 'all 0.15s'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--primary)'
+              e.currentTarget.style.color = '#ffffff'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'
+              e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'
             }}
           >
-            <span>📥</span>
+            <span style={{ display: 'inline-block' }}>📥</span>
             <span>Importar</span>
           </button>
         </div>
 
         {/* Usuario */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
+          <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: 13, fontWeight: 500 }}>
             {user?.name || 'Admin'}
           </span>
           <div style={{
             width: '32px',
             height: '32px',
             borderRadius: '50%',
-            background: 'var(--bg-card)',
-            border: '2px solid var(--accent-tkd)',
+            background: 'rgba(0, 0, 0, 0.4)',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '16px'
+            fontSize: 14
           }}>
             👤
           </div>
